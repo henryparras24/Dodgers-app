@@ -14,7 +14,8 @@ function getBaseball(event) {
     //console.log(cityName);
 
     getTeams();
-    
+    getMookie();
+    getCt();
 }   
     
 function getTeams(){
@@ -50,4 +51,46 @@ function displayDodgers(data) {
     // chosenCityEl.innerHTML = `${city}`;
 
    
+}
+
+
+function getMookie(){
+    fetch("https://mlb-data.p.rapidapi.com/json/named.proj_pecota_batting.bam?player_id='605141'&league_list_id='mlb'&season='2021'", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051",
+		"x-rapidapi-host": "mlb-data.p.rapidapi.com"
+	}
+})
+.then(response => {
+	return response.json();
+}).then(data => {
+    console.log(data);
+})
+.catch(err => {
+	console.error(err);
+});
+
+
+}
+
+
+function getCt(){
+    fetch("https://mlb-data.p.rapidapi.com/json/named.proj_pecota_batting.bam?player_id='621035'&league_list_id='mlb'&season='2021'", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051",
+		"x-rapidapi-host": "mlb-data.p.rapidapi.com"
+	}
+})
+.then(response => {
+	return response.json();
+}).then(data => {
+    console.log(data);
+})
+.catch(err => {
+	console.error(err);
+});
+
+
 }
