@@ -66,12 +66,35 @@ function getMookie(){
 	return response.json();
 }).then(data => {
     console.log(data);
+    displayMookie(data);
 })
 .catch(err => {
 	console.error(err);
 });
 
 
+}
+
+function displayMookie(data){
+    var mookieEl = document.querySelector("#mookie");
+    
+    var mookieBody = document.createElement('div');
+    mookieBody.classList.add('card');
+    mookieBody.classList.add('bg-primary');
+    mookieBody.classList.add('text-white');
+    mookieEl.append(mookieBody);
+
+    var mookieName = document.createElement('div');
+    mookieName.innerHTML = `Mookie Betts`;
+    mookieBody.appendChild(mookieName);
+
+    var mookieAvg = document.createElement('div');
+    mookieAvg.innerHTML = `Avg: ${data.proj_pecota_batting.queryResults.row.avg}`;
+    mookieBody.appendChild(mookieAvg);
+
+    var mookieHr = document.createElement('div');
+    mookieHr.innerHTML = `HR: ${data.proj_pecota_batting.queryResults.row.hr}`;
+    mookieBody.appendChild(mookieHr);
 }
 
 
@@ -87,10 +110,39 @@ function getCt(){
 	return response.json();
 }).then(data => {
     console.log(data);
+    console.log(data.proj_pecota_batting.queryResults.row.avg)
+    console.log(data.proj_pecota_batting.queryResults.row.ops)
+    console.log(data.proj_pecota_batting.queryResults.row.hr)
+    console.log(data.proj_pecota_batting.queryResults.row.rbi)
+    console.log(data.proj_pecota_batting.queryResults.row.r)
+    console.log(data.proj_pecota_batting.queryResults.row.bb)
+    displayCt(data);
 })
 .catch(err => {
 	console.error(err);
 });
 
 
+}
+
+function displayCt(data){
+    var ctEl = document.querySelector("#ct");
+    
+    var ctBody = document.createElement('div');
+    ctBody.classList.add('card');
+    ctBody.classList.add('bg-primary');
+    ctBody.classList.add('text-white');
+    ctEl.append(ctBody);
+
+    var ctName = document.createElement('div');
+    ctName.innerHTML = `Chris Taylor`;
+    ctBody.appendChild(ctName);
+
+    var ctAvg = document.createElement('div');
+    ctAvg.innerHTML = `Avg: ${data.proj_pecota_batting.queryResults.row.avg}`;
+    ctBody.appendChild(ctAvg);
+
+    var ctHr = document.createElement('div');
+    ctHr.innerHTML = `HR: ${data.proj_pecota_batting.queryResults.row.hr}`;
+    ctBody.appendChild(ctHr);
 }
