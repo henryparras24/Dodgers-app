@@ -16,6 +16,7 @@ function getBaseball(event) {
     getTeams();
     getMookie();
     getCt();
+    getJt();
 }   
     
 function getTeams(){
@@ -145,4 +146,47 @@ function displayCt(data){
     var ctHr = document.createElement('div');
     ctHr.innerHTML = `HR: ${data.proj_pecota_batting.queryResults.row.hr}`;
     ctBody.appendChild(ctHr);
+}
+
+function getJt(){
+    fetch("https://mlb-data.p.rapidapi.com/json/named.proj_pecota_batting.bam?player_id='457759'&league_list_id='mlb'&season='2021'", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051",
+		"x-rapidapi-host": "mlb-data.p.rapidapi.com"
+	}
+})
+.then(response => {
+	return response.json();
+}).then(data => {
+    console.log(data);
+    displayJt(data);
+})
+.catch(err => {
+	console.error(err);
+});
+
+
+}
+
+function displayJt(data){
+    var jtEl = document.querySelector("#jt");
+    
+    var jtBody = document.createElement('div');
+    jtBody.classList.add('card');
+    jtBody.classList.add('bg-primary');
+    jtBody.classList.add('text-white');
+    jtEl.append(jtBody);
+
+    var jtName = document.createElement('div');
+    jtName.innerHTML = `Justin Turner`;
+    jtBody.appendChild(jtName);
+
+    var jtAvg = document.createElement('div');
+    jtAvg.innerHTML = `Avg: ${data.proj_pecota_batting.queryResults.row.avg}`;
+    jtBody.appendChild(jtAvg);
+
+    var jtHr = document.createElement('div');
+    jtHr.innerHTML = `HR: ${data.proj_pecota_batting.queryResults.row.hr}`;
+    jtBody.appendChild(jtHr);
 }
