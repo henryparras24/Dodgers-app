@@ -5,10 +5,10 @@ var logoEl = document.querySelector("#logo");
 var winsEl = document.querySelector("#wins");
 var losesEl = document.querySelector("#loses");
 
-buttonEl.addEventListener('click', getBaseball);
+// buttonEl.addEventListener('click', getBaseball);
 
-function getBaseball(event) {
-    event.preventDefault();
+window.onload = function getBaseball() {
+    // event.preventDefault();
     //var cityName = cityNameEl.value
     
     //console.log(cityName);
@@ -47,7 +47,7 @@ function displayDodgers(data) {
                     
     winsEl.innerHTML = `Wins: ${data.response.games.wins.all.total}`;
     losesEl.innerHTML = `Loses: ${data.response.games.loses.all.total}`;
-    logoEl.innerHTML = `<img src="https://i.ibb.co/ss1Z6H1/dodgers-world-series-video.jpg" width="100%">`;
+    logoEl.innerHTML = `<img src="https://i.ibb.co/vvD3hrH/Dodgers-2020-World-Series-Art.jpg" width="100%">`;
     // momentoEl.innerHTML =  `${momento}`;
     // chosenCityEl.innerHTML = `${city}`;
 
@@ -86,7 +86,7 @@ function displayMookie(data){
     mookieEl.append(mookieBody);
 
     var mookiePic = document.createElement('div');
-    mookiePic.innerHTML = `<img src="https://i.ibb.co/tZfbSkS/mookie-betts-6.png" width="100%">`;
+    mookiePic.innerHTML = `<img src="https://i.ibb.co/tZfbSkS/mookie-betts-6.png" height="200px" width="300px">`;
     mookieBody.appendChild(mookiePic);
 
     var mookieName = document.createElement('div');
@@ -152,7 +152,7 @@ function displayCt(data){
     ctEl.append(ctBody);
 
     var ctPic = document.createElement('div');
-    ctPic.innerHTML = `<img src="https://i.ibb.co/nLtWrJr/ctslide.jpg" width="100%">`;
+    ctPic.innerHTML = `<img src="https://i.ibb.co/7GcXVhp/ct3.jpg" height="200px" width="300px">`;
     ctBody.appendChild(ctPic);
 
     var ctName = document.createElement('div');
@@ -210,8 +210,12 @@ function displayJt(data){
     jtBody.classList.add('text-white');
     jtEl.append(jtBody);
 
+    var heavyHit = document.createElement('div');
+    heavyHit.innerHTML = `<h3>Heavy Hitters 💥</h3>`;
+    jtBody.appendChild(heavyHit);
+
     var jtPic = document.createElement('div');
-    jtPic.innerHTML = `<img src="https://i.ibb.co/8Xs7XB7/justinturnerarticlepic.jpg" width="100%">`;
+    jtPic.innerHTML = `<img src="https://i.ibb.co/8Xs7XB7/justinturnerarticlepic.jpg" height="200px" width="300px">`;
     jtBody.appendChild(jtPic);
 
     var jtName = document.createElement('div');
