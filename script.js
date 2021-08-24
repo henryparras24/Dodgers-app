@@ -17,6 +17,7 @@ window.onload = function getBaseball() {
     getMookie();
     getCt();
     getJt();
+    getSchedule();
 }   
     
 function getTeams(){
@@ -241,4 +242,64 @@ function displayJt(data){
     var jtR = document.createElement('div');
     jtR.innerHTML = `R: ${data.proj_pecota_batting.queryResults.row.r}`;
     jtBody.appendChild(jtR);
+}
+
+function getSchedule(){
+    fetch("https://api-baseball.p.rapidapi.com/games?team=18&season=2021&league=1", {
+      "method": "GET",
+      "headers": {
+          "x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051",
+          "x-rapidapi-host": "api-baseball.p.rapidapi.com"
+      }
+  })
+.then(response => {
+  return response.json();
+}).then(data => {
+  console.log(data);
+  console.log(data.response);
+  for (var i = 0; i <  data.response.length; i++) {
+     
+      var games = data.response[i]
+      
+      console.log(games);
+      console.log(games.date);
+      console.log(games.teams.away.name);
+     
+       var gamesDetails = {
+          gameDate: games.date,
+          gameAway: games.teams.away.name,
+          gameHome: games.teams.home.name,
+        
+      }
+       displaySchedule(gamesDetails);
+  }
+      
+    
+  
+})
+.catch(err => {
+  console.error(err);
+});
+}
+
+function displaySchedule(gamesDetails) {
+    var scheduleEl = document.querySelector("#schedule");
+    
+    var scheduleBody = document.createElement('div');
+    scheduleBody.classList.add('card');
+    scheduleBody.classList.add('bg-primary');
+    scheduleBody.classList.add('text-white');
+    scheduleEl.append(scheduleBody);
+
+    var gameDate = document.createElement('div');
+    gameDate.innerHTML = `${gamesDetails.gameDate}`;
+    scheduleBody.appendChild(gameDate);
+
+    var gameAway = document.createElement('div');
+    gameAway.innerHTML = `${gamesDetails.gameAway}`;
+    scheduleBody.appendChild(gameAway);
+
+    var gameHome = document.createElement('div');
+    gameHome.innerHTML = `${gamesDetails.gameHome}`;
+    scheduleBody.appendChild(gameHome);
 }
