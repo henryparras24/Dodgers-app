@@ -1,26 +1,30 @@
 var key = "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051";
 
-var buttonEl = document.querySelector("#submitButton");
+var winsLosesEl = document.querySelector("#winsLoses");
+var playerStatsEl = document.querySelector("#playerStats");
+var teamScheduleEl = document.querySelector("#teamSchedule");
 var logoEl = document.querySelector("#logo");
 var winsEl = document.querySelector("#wins");
 var losesEl = document.querySelector("#loses");
 
-// buttonEl.addEventListener('click', getBaseball);
+winsLosesEl.addEventListener('click', getWinsLoses);
+// playerStatsEl.addEventListener('click', getPlayerStats);
+teamScheduleEl.addEventListener('click', getSchedule);
 
-window.onload = function getBaseball() {
-    // event.preventDefault();
-    //var cityName = cityNameEl.value
+// window.onload = function getBaseball() {
+//     // event.preventDefault();
+//     //var cityName = cityNameEl.value
     
-    //console.log(cityName);
+//     //console.log(cityName);
 
-    getTeams();
-    getMookie();
-    getCt();
-    getJt();
-    getSchedule();
-}   
+//     getTeams();
+//     getMookie();
+//     getCt();
+//     getJt();
+//     getSchedule();
+// }   
     
-function getTeams(){
+function getWinsLoses(){
     fetch("https://api-baseball.p.rapidapi.com/teams/statistics?team=18&season=2021&league=1", {
         "method": "GET",
         "headers": {
@@ -48,7 +52,7 @@ function displayDodgers(data) {
                     
     winsEl.innerHTML = `Wins: ${data.response.games.wins.all.total}`;
     losesEl.innerHTML = `Loses: ${data.response.games.loses.all.total}`;
-    logoEl.innerHTML = `<img src="https://i.ibb.co/vvD3hrH/Dodgers-2020-World-Series-Art.jpg" width="100%">`;
+    // logoEl.innerHTML = `<img src="https://i.ibb.co/vvD3hrH/Dodgers-2020-World-Series-Art.jpg" width="100%">`;
     // momentoEl.innerHTML =  `${momento}`;
     // chosenCityEl.innerHTML = `${city}`;
 
