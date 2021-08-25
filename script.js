@@ -8,21 +8,21 @@ var winsEl = document.querySelector("#wins");
 var losesEl = document.querySelector("#loses");
 
 winsLosesEl.addEventListener('click', getWinsLoses);
-// playerStatsEl.addEventListener('click', getPlayerStats);
+playerStatsEl.addEventListener('click', getPlayerStats);
 teamScheduleEl.addEventListener('click', getSchedule);
 
-// window.onload = function getBaseball() {
-//     // event.preventDefault();
-//     //var cityName = cityNameEl.value
-    
-//     //console.log(cityName);
+function getPlayerStats() {
 
-//     getTeams();
-//     getMookie();
-//     getCt();
-//     getJt();
-//     getSchedule();
-// }   
+
+    
+
+
+
+     getMookie();
+     getCt();
+     getJt();
+
+ }   
     
 function getWinsLoses(){
     fetch("https://api-baseball.p.rapidapi.com/teams/statistics?team=18&season=2021&league=1", {
