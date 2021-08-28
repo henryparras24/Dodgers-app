@@ -2,4 +2,6 @@
 
 .dodgerBlue {color: dodgerblue}
 
-.pill {border-radius: 30px; padding: 20px;}
+.pill {border-radius: 30px; padding: 10px;}
+
+.pills {display: flex; justify-content: center;}
