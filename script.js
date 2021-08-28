@@ -1,28 +1,25 @@
-var key = "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051";
-
 var winsLosesEl = document.querySelector("#winsLoses");
 var playerStatsEl = document.querySelector("#playerStats");
 var teamScheduleEl = document.querySelector("#teamSchedule");
-var logoEl = document.querySelector("#logo");
-var winsEl = document.querySelector("#wins");
-var losesEl = document.querySelector("#loses");
+
+var record = document.querySelector(".record");
+var jtStats = document.querySelector(".jtStats");
+var mookieStats = document.querySelector(".mookieStats");
+var ctStats = document.querySelector(".ctStats");
+var schedule = document.querySelector(".schedule");
 
 winsLosesEl.addEventListener('click', getWinsLoses);
 playerStatsEl.addEventListener('click', getPlayerStats);
 teamScheduleEl.addEventListener('click', getSchedule);
 
 function getPlayerStats() {
-
-
+    record.innerHTML = "";
+    schedule.innerHTML = "";
     
-
-
-
-     getMookie();
-     getCt();
-     getJt();
-
- }   
+    getMookie();
+    getCt();
+    getJt();
+}   
     
 function getWinsLoses(){
     fetch("https://api-baseball.p.rapidapi.com/teams/statistics?team=18&season=2021&league=1", {
@@ -39,7 +36,13 @@ function getWinsLoses(){
         console.log(data.response.team.logo)
         console.log(data.response.games.wins.all.total)
         console.log(data.response.games.loses.all.total)
-        displayDodgers(data);
+        jtStats.innerHTML = "";
+        mookieStats.innerHTML = "";
+        ctStats.innerHTML = "";
+        schedule.innerHTML = "";
+        displayRecord(data);
+
+        
     })
     .catch(err => {
         console.error(err);
@@ -48,13 +51,23 @@ function getWinsLoses(){
     
 }
 
-function displayDodgers(data) {
-                    
-    winsEl.innerHTML = `Wins: ${data.response.games.wins.all.total}`;
-    losesEl.innerHTML = `Loses: ${data.response.games.loses.all.total}`;
-    // logoEl.innerHTML = `<img src="https://i.ibb.co/vvD3hrH/Dodgers-2020-World-Series-Art.jpg" width="100%">`;
-    // momentoEl.innerHTML =  `${momento}`;
-    // chosenCityEl.innerHTML = `${city}`;
+function displayRecord(data) {
+    var recordEl = document.querySelector("#record");
+    
+    var recordBody = document.createElement('div');
+    recordBody.classList.add('card');
+    recordBody.classList.add('bg-primary');
+    recordBody.classList.add('text-white');
+    recordEl.append(recordBody);
+
+    var wins = document.createElement('div');
+    wins.innerHTML = `Wins: ${data.response.games.wins.all.total}`;
+    recordBody.appendChild(wins);
+
+    var loses = document.createElement('div');
+    loses.innerHTML = `Loses: ${data.response.games.loses.all.total}`;
+    recordBody.appendChild(loses);
+    
 
    
 }
@@ -216,7 +229,7 @@ function displayJt(data){
     jtEl.append(jtBody);
 
     var heavyHit = document.createElement('div');
-    heavyHit.innerHTML = `<h3>Heavy Hitters 💥</h3>`;
+    heavyHit.innerHTML = `<h3>Hot Hitters 🔥</h3>`;
     jtBody.appendChild(heavyHit);
 
     var jtPic = document.createElement('div');
@@ -275,6 +288,10 @@ function getSchedule(){
           gameHome: games.teams.home.name,
         
       }
+       record.innerHTML = "";
+       jtStats.innerHTML = "";
+       mookieStats.innerHTML = "";
+       ctStats.innerHTML = "";
        displaySchedule(gamesDetails);
   }
       
