@@ -36,6 +36,10 @@ function getWinsLoses() {
             console.log(data.response.team.logo)
             console.log(data.response.games.wins.all.total)
             console.log(data.response.games.loses.all.total)
+            console.log(data.response.games.wins.home.total)
+            console.log(data.response.games.loses.home.total)
+            console.log(data.response.games.wins.away.total)
+            console.log(data.response.games.loses.away.total)
             jtStats.innerHTML = "";
             mookieStats.innerHTML = "";
             ctStats.innerHTML = "";
@@ -68,8 +72,29 @@ function displayRecord(data) {
     loses.innerHTML = `Loses: ${data.response.games.loses.all.total}`;
     recordBody.appendChild(loses);
 
+    var homeSplits = document.createElement('div');
+    homeSplits.innerHTML = `Home Splits 🏡`;
+    recordBody.appendChild(homeSplits);
 
+    var homeWins = document.createElement('div');
+    homeWins.innerHTML = `Wins: ${data.response.games.wins.home.total}`;
+    recordBody.appendChild(homeWins);
 
+    var homeLoses = document.createElement('div');
+    homeLoses.innerHTML = `Loses: ${data.response.games.loses.home.total}`;
+    recordBody.appendChild(homeLoses);
+
+    var awaySplits = document.createElement('div');
+    awaySplits.innerHTML = `Away Splits ✈️`;
+    recordBody.appendChild(awaySplits);
+
+    var awayWins = document.createElement('div');
+    awayWins.innerHTML = `Wins: ${data.response.games.wins.away.total}`;
+    recordBody.appendChild(awayWins);
+
+    var awayLoses = document.createElement('div');
+    awayLoses.innerHTML = `Wins: ${data.response.games.loses.away.total}`;
+    recordBody.appendChild(awayLoses);
 }
 
 
@@ -327,13 +352,12 @@ function displaySchedule(gamesDetails) {
     // scheduleBody.appendChild(gameAway);
 
     var matchup = document.createElement('div');
-    matchup.innerHTML = "<img src='https://media.api-sports.io/baseball/teams/"+ gamesDetails.gameAwayId + ".png' height=50px width=50px>" + `@`+ "<img src='https://media.api-sports.io/baseball/teams/"+ gamesDetails.gameHomeId + ".png' height=50px width=50px>";
-   
+    matchup.innerHTML = "<img src='https://media.api-sports.io/baseball/teams/"+ gamesDetails.gameAwayId + ".png' height=50px width=50px>" + `@` + "<img src='https://media.api-sports.io/baseball/teams/"+ gamesDetails.gameHomeId + ".png' height=50px width=50px>";
     scheduleBody.appendChild(matchup);
 
-    // var gameHome = document.createElement('div');
-    // gameHome.innerHTML = `@ ${gamesDetails.gameHome}`;
-    // scheduleBody.appendChild(gameHome);
+    // var at = document.createElement('div');
+    // at.innerHTML = `@`;
+    // scheduleBody.appendChild(at);
 
     // var gameHomeLogo = document.createElement('div');
     // gameHomeLogo.innerHTML = "<img src='https://media.api-sports.io/baseball/teams/"+ gamesDetails.gameHomeId + ".png' height=50px width=50px>";
