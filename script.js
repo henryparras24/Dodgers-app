@@ -1,7 +1,7 @@
 var winsLosesEl = document.querySelector("#winsLoses");
 var playerStatsEl = document.querySelector("#playerStats");
 var teamScheduleEl = document.querySelector("#teamSchedule");
-
+var momento = moment().format();
 var record = document.querySelector(".record");
 var jtStats = document.querySelector(".jtStats");
 var mookieStats = document.querySelector(".mookieStats");
@@ -15,13 +15,13 @@ teamScheduleEl.addEventListener('click', getSchedule);
 function getPlayerStats() {
     record.innerHTML = "";
     schedule.innerHTML = "";
-    
+
     getMookie();
     getCt();
     getJt();
-}   
-    
-function getWinsLoses(){
+}
+
+function getWinsLoses() {
     fetch("https://api-baseball.p.rapidapi.com/teams/statistics?team=18&season=2021&league=1", {
         "method": "GET",
         "headers": {
@@ -29,31 +29,31 @@ function getWinsLoses(){
             "x-rapidapi-host": "api-baseball.p.rapidapi.com"
         }
     })
-    .then(response => {
-        return response.json();
-    }).then(data => {
-        console.log(data);
-        console.log(data.response.team.logo)
-        console.log(data.response.games.wins.all.total)
-        console.log(data.response.games.loses.all.total)
-        jtStats.innerHTML = "";
-        mookieStats.innerHTML = "";
-        ctStats.innerHTML = "";
-        schedule.innerHTML = "";
-        displayRecord(data);
+        .then(response => {
+            return response.json();
+        }).then(data => {
+            console.log(data);
+            console.log(data.response.team.logo)
+            console.log(data.response.games.wins.all.total)
+            console.log(data.response.games.loses.all.total)
+            jtStats.innerHTML = "";
+            mookieStats.innerHTML = "";
+            ctStats.innerHTML = "";
+            schedule.innerHTML = "";
+            displayRecord(data);
 
-        
-    })
-    .catch(err => {
-        console.error(err);
-    });
 
-    
+        })
+        .catch(err => {
+            console.error(err);
+        });
+
+
 }
 
 function displayRecord(data) {
     var recordEl = document.querySelector("#record");
-    
+
     var recordBody = document.createElement('div');
     recordBody.classList.add('card');
     recordBody.classList.add('bg-primary');
@@ -67,36 +67,36 @@ function displayRecord(data) {
     var loses = document.createElement('div');
     loses.innerHTML = `Loses: ${data.response.games.loses.all.total}`;
     recordBody.appendChild(loses);
-    
 
-   
+
+
 }
 
 
-function getMookie(){
+function getMookie() {
     fetch("https://mlb-data.p.rapidapi.com/json/named.proj_pecota_batting.bam?player_id='605141'&league_list_id='mlb'&season='2021'", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051",
-		"x-rapidapi-host": "mlb-data.p.rapidapi.com"
-	}
-})
-.then(response => {
-	return response.json();
-}).then(data => {
-    console.log(data);
-    displayMookie(data);
-})
-.catch(err => {
-	console.error(err);
-});
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051",
+            "x-rapidapi-host": "mlb-data.p.rapidapi.com"
+        }
+    })
+        .then(response => {
+            return response.json();
+        }).then(data => {
+            console.log(data);
+            displayMookie(data);
+        })
+        .catch(err => {
+            console.error(err);
+        });
 
 
 }
 
-function displayMookie(data){
+function displayMookie(data) {
     var mookieEl = document.querySelector("#mookie");
-    
+
     var mookieBody = document.createElement('div');
     mookieBody.classList.add('card');
     mookieBody.classList.add('bg-primary');
@@ -133,36 +133,36 @@ function displayMookie(data){
 }
 
 
-function getCt(){
+function getCt() {
     fetch("https://mlb-data.p.rapidapi.com/json/named.proj_pecota_batting.bam?player_id='621035'&league_list_id='mlb'&season='2021'", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051",
-		"x-rapidapi-host": "mlb-data.p.rapidapi.com"
-	}
-})
-.then(response => {
-	return response.json();
-}).then(data => {
-    console.log(data);
-    console.log(data.proj_pecota_batting.queryResults.row.avg)
-    console.log(data.proj_pecota_batting.queryResults.row.ops)
-    console.log(data.proj_pecota_batting.queryResults.row.hr)
-    console.log(data.proj_pecota_batting.queryResults.row.rbi)
-    console.log(data.proj_pecota_batting.queryResults.row.r)
-    console.log(data.proj_pecota_batting.queryResults.row.bb)
-    displayCt(data);
-})
-.catch(err => {
-	console.error(err);
-});
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051",
+            "x-rapidapi-host": "mlb-data.p.rapidapi.com"
+        }
+    })
+        .then(response => {
+            return response.json();
+        }).then(data => {
+            console.log(data);
+            console.log(data.proj_pecota_batting.queryResults.row.avg)
+            console.log(data.proj_pecota_batting.queryResults.row.ops)
+            console.log(data.proj_pecota_batting.queryResults.row.hr)
+            console.log(data.proj_pecota_batting.queryResults.row.rbi)
+            console.log(data.proj_pecota_batting.queryResults.row.r)
+            console.log(data.proj_pecota_batting.queryResults.row.bb)
+            displayCt(data);
+        })
+        .catch(err => {
+            console.error(err);
+        });
 
 
 }
 
-function displayCt(data){
+function displayCt(data) {
     var ctEl = document.querySelector("#ct");
-    
+
     var ctBody = document.createElement('div');
     ctBody.classList.add('card');
     ctBody.classList.add('bg-primary');
@@ -198,30 +198,30 @@ function displayCt(data){
     ctBody.appendChild(ctR);
 }
 
-function getJt(){
+function getJt() {
     fetch("https://mlb-data.p.rapidapi.com/json/named.proj_pecota_batting.bam?player_id='457759'&league_list_id='mlb'&season='2021'", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051",
-		"x-rapidapi-host": "mlb-data.p.rapidapi.com"
-	}
-})
-.then(response => {
-	return response.json();
-}).then(data => {
-    console.log(data);
-    displayJt(data);
-})
-.catch(err => {
-	console.error(err);
-});
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051",
+            "x-rapidapi-host": "mlb-data.p.rapidapi.com"
+        }
+    })
+        .then(response => {
+            return response.json();
+        }).then(data => {
+            console.log(data);
+            displayJt(data);
+        })
+        .catch(err => {
+            console.error(err);
+        });
 
 
 }
 
-function displayJt(data){
+function displayJt(data) {
     var jtEl = document.querySelector("#jt");
-    
+
     var jtBody = document.createElement('div');
     jtBody.classList.add('card');
     jtBody.classList.add('bg-primary');
@@ -261,51 +261,55 @@ function displayJt(data){
     jtBody.appendChild(jtR);
 }
 
-function getSchedule(){
+function getSchedule() {
     fetch("https://api-baseball.p.rapidapi.com/games?team=18&season=2021&league=1", {
-      "method": "GET",
-      "headers": {
-          "x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051",
-          "x-rapidapi-host": "api-baseball.p.rapidapi.com"
-      }
-  })
-.then(response => {
-  return response.json();
-}).then(data => {
-  console.log(data);
-  console.log(data.response);
-  for (var i = 0; i <  data.response.length; i++) {
-     
-      var games = data.response[i]
-      
-      console.log(games);
-      console.log(games.date);
-      console.log(games.teams.away.name);
-     
-       var gamesDetails = {
-          gameDate: games.date,
-          gameAway: games.teams.away.name,
-          gameHome: games.teams.home.name,
-        
-      }
-       record.innerHTML = "";
-       jtStats.innerHTML = "";
-       mookieStats.innerHTML = "";
-       ctStats.innerHTML = "";
-       displaySchedule(gamesDetails);
-  }
-      
-    
-  
-})
-.catch(err => {
-  console.error(err);
-});
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051",
+            "x-rapidapi-host": "api-baseball.p.rapidapi.com"
+        }
+    })
+        .then(response => {
+            return response.json();
+        }).then(data => {
+            console.log(data);
+            console.log(data.response);
+            for (var i = 0; i < data.response.length; i++) {
+
+                var games = data.response[i]
+                
+                console.log(games);
+                console.log(games.date);
+                console.log(games.teams.away.name);
+                console.log(momento);
+                if (games.date >= momento) {
+                    var gamesDetails = {
+                        gameDate: moment(games.date).format('MM/DD/YYYY'),
+                        gameAway: games.teams.away.name,
+                        gameHome: games.teams.home.name,
+                    }
+                    record.innerHTML = "";
+                    jtStats.innerHTML = "";
+                    mookieStats.innerHTML = "";
+                    ctStats.innerHTML = "";
+                    displaySchedule(gamesDetails);
+                }
+
+
+
+            }
+
+
+
+        })
+        .catch(err => {
+            console.error(err);
+        });
 }
 
 function displaySchedule(gamesDetails) {
     var scheduleEl = document.querySelector("#schedule");
-    
+
     var scheduleBody = document.createElement('div');
     scheduleBody.classList.add('card');
     scheduleBody.classList.add('bg-primary');
@@ -324,3 +328,4 @@ function displaySchedule(gamesDetails) {
     gameHome.innerHTML = `${gamesDetails.gameHome}`;
     scheduleBody.appendChild(gameHome);
 }
+
