@@ -284,9 +284,11 @@ function getSchedule() {
                 console.log(momento);
                 if (games.date >= momento) {
                     var gamesDetails = {
-                        gameDate: moment(games.date).format('MM/DD/YYYY'),
+                        gameDate: moment(games.date).format('dddd, MMMM Do YYYY, h:mm a'),
                         gameAway: games.teams.away.name,
+                        gameAwayId: games.teams.away.id,
                         gameHome: games.teams.home.name,
+                        gameHomeId: games.teams.home.id,
                     }
                     record.innerHTML = "";
                     jtStats.innerHTML = "";
@@ -320,12 +322,21 @@ function displaySchedule(gamesDetails) {
     gameDate.innerHTML = `${gamesDetails.gameDate}`;
     scheduleBody.appendChild(gameDate);
 
-    var gameAway = document.createElement('div');
-    gameAway.innerHTML = `${gamesDetails.gameAway}`;
-    scheduleBody.appendChild(gameAway);
+    // var gameAway = document.createElement('div');
+    // gameAway.innerHTML = `${gamesDetails.gameAway}`;
+    // scheduleBody.appendChild(gameAway);
 
-    var gameHome = document.createElement('div');
-    gameHome.innerHTML = `${gamesDetails.gameHome}`;
-    scheduleBody.appendChild(gameHome);
+    var matchup = document.createElement('div');
+    matchup.innerHTML = "<img src='https://media.api-sports.io/baseball/teams/"+ gamesDetails.gameAwayId + ".png' height=50px width=50px>" + `@`+ "<img src='https://media.api-sports.io/baseball/teams/"+ gamesDetails.gameHomeId + ".png' height=50px width=50px>";
+   
+    scheduleBody.appendChild(matchup);
+
+    // var gameHome = document.createElement('div');
+    // gameHome.innerHTML = `@ ${gamesDetails.gameHome}`;
+    // scheduleBody.appendChild(gameHome);
+
+    // var gameHomeLogo = document.createElement('div');
+    // gameHomeLogo.innerHTML = "<img src='https://media.api-sports.io/baseball/teams/"+ gamesDetails.gameHomeId + ".png' height=50px width=50px>";
+    // scheduleBody.appendChild(gameHomeLogo);
 }
 
