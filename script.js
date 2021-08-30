@@ -4,8 +4,8 @@ var teamScheduleEl = document.querySelector("#teamSchedule");
 var momento = moment().format();
 var record = document.querySelector(".record");
 var jtStats = document.querySelector(".jtStats");
-var mookieStats = document.querySelector(".mookieStats");
-var ctStats = document.querySelector(".ctStats");
+var treaStats = document.querySelector(".treaStats");
+var pollockStats = document.querySelector(".pollockStats");
 var schedule = document.querySelector(".schedule");
 
 winsLosesEl.addEventListener('click', getWinsLoses);
@@ -16,8 +16,8 @@ function getPlayerStats() {
     record.innerHTML = "";
     schedule.innerHTML = "";
 
-    getMookie();
-    getCt();
+    getTrea();
+    getPollock();
     getJt();
 }
 
@@ -41,8 +41,8 @@ function getWinsLoses() {
             console.log(data.response.games.wins.away.total)
             console.log(data.response.games.loses.away.total)
             jtStats.innerHTML = "";
-            mookieStats.innerHTML = "";
-            ctStats.innerHTML = "";
+            treaStats.innerHTML = "";
+            pollockStats.innerHTML = "";
             schedule.innerHTML = "";
             displayRecord(data);
 
@@ -98,8 +98,8 @@ function displayRecord(data) {
 }
 
 
-function getMookie() {
-    fetch("https://mlb-data.p.rapidapi.com/json/named.proj_pecota_batting.bam?player_id='605141'&league_list_id='mlb'&season='2021'", {
+function getTrea() {
+    fetch("https://mlb-data.p.rapidapi.com/json/named.proj_pecota_batting.bam?player_id='607208'&league_list_id='mlb'&season='2021'", {
         "method": "GET",
         "headers": {
             "x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051",
@@ -110,7 +110,7 @@ function getMookie() {
             return response.json();
         }).then(data => {
             console.log(data);
-            displayMookie(data);
+            displayTrea(data);
         })
         .catch(err => {
             console.error(err);
@@ -119,47 +119,51 @@ function getMookie() {
 
 }
 
-function displayMookie(data) {
-    var mookieEl = document.querySelector("#mookie");
+function displayTrea(data) {
+    var treaEl = document.querySelector("#trea");
 
-    var mookieBody = document.createElement('div');
-    mookieBody.classList.add('card');
-    mookieBody.classList.add('bg-primary');
-    mookieBody.classList.add('text-white');
-    mookieEl.append(mookieBody);
+    var treaBody = document.createElement('div');
+    treaBody.classList.add('card');
+    treaBody.classList.add('bg-primary');
+    treaBody.classList.add('text-white');
+    treaEl.append(treaBody);
 
-    var mookiePic = document.createElement('div');
-    mookiePic.innerHTML = `<img src="https://i.ibb.co/tZfbSkS/mookie-betts-6.png" height="200px" width="300px">`;
-    mookieBody.appendChild(mookiePic);
+    var heavyHit = document.createElement('div');
+    heavyHit.innerHTML = `<h3>Top Performers ⚾️</h3>`;
+    treaBody.appendChild(heavyHit);
 
-    var mookieName = document.createElement('div');
-    mookieName.innerHTML = `Mookie Betts`;
-    mookieBody.appendChild(mookieName);
+    var treaPic = document.createElement('div');
+    treaPic.innerHTML = `<img src="https://i.ibb.co/TmRwwsQ/LOS-ANGELES-CA-AUGUST-20-Trea-Turner-6-of-the-Los-Angeles-Dodgers-flies-around-third-base-on-his-way.jpg" height="200px" width="300px">`;
+    treaBody.appendChild(treaPic);
 
-    var mookieAvg = document.createElement('div');
-    mookieAvg.innerHTML = `Avg: ${data.proj_pecota_batting.queryResults.row.avg}`;
-    mookieBody.appendChild(mookieAvg);
+    var treaName = document.createElement('div');
+    treaName.innerHTML = `Trea Turner`;
+    treaBody.appendChild(treaName);
 
-    var mookieOps = document.createElement('div');
-    mookieOps.innerHTML = `OPS: ${data.proj_pecota_batting.queryResults.row.ops}`;
-    mookieBody.appendChild(mookieOps);
+    var treaAvg = document.createElement('div');
+    treaAvg.innerHTML = `Avg: ${data.proj_pecota_batting.queryResults.row.avg}`;
+    treaBody.appendChild(treaAvg);
 
-    var mookieHr = document.createElement('div');
-    mookieHr.innerHTML = `HR: ${data.proj_pecota_batting.queryResults.row.hr}`;
-    mookieBody.appendChild(mookieHr);
+    var treaOps = document.createElement('div');
+    treaOps.innerHTML = `OPS: ${data.proj_pecota_batting.queryResults.row.ops}`;
+    treaBody.appendChild(treaOps);
 
-    var mookieRbi = document.createElement('div');
-    mookieRbi.innerHTML = `RBI: ${data.proj_pecota_batting.queryResults.row.rbi}`;
-    mookieBody.appendChild(mookieRbi);
+    var treaHr = document.createElement('div');
+    treaHr.innerHTML = `HR: ${data.proj_pecota_batting.queryResults.row.hr}`;
+    treaBody.appendChild(treaHr);
 
-    var mookieR = document.createElement('div');
-    mookieR.innerHTML = `R: ${data.proj_pecota_batting.queryResults.row.r}`;
-    mookieBody.appendChild(mookieR);
+    var treaRbi = document.createElement('div');
+    treaRbi.innerHTML = `RBI: ${data.proj_pecota_batting.queryResults.row.rbi}`;
+    treaBody.appendChild(treaRbi);
+
+    var treaR = document.createElement('div');
+    treaR.innerHTML = `R: ${data.proj_pecota_batting.queryResults.row.r}`;
+    treaBody.appendChild(treaR);
 }
 
 
-function getCt() {
-    fetch("https://mlb-data.p.rapidapi.com/json/named.proj_pecota_batting.bam?player_id='621035'&league_list_id='mlb'&season='2021'", {
+function getPollock() {
+    fetch("https://mlb-data.p.rapidapi.com/json/named.proj_pecota_batting.bam?player_id='572041'&league_list_id='mlb'&season='2021'", {
         "method": "GET",
         "headers": {
             "x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051",
@@ -176,7 +180,7 @@ function getCt() {
             console.log(data.proj_pecota_batting.queryResults.row.rbi)
             console.log(data.proj_pecota_batting.queryResults.row.r)
             console.log(data.proj_pecota_batting.queryResults.row.bb)
-            displayCt(data);
+            displayPollock(data);
         })
         .catch(err => {
             console.error(err);
@@ -185,42 +189,42 @@ function getCt() {
 
 }
 
-function displayCt(data) {
-    var ctEl = document.querySelector("#ct");
+function displayPollock(data) {
+    var pollockEl = document.querySelector("#pollock");
 
-    var ctBody = document.createElement('div');
-    ctBody.classList.add('card');
-    ctBody.classList.add('bg-primary');
-    ctBody.classList.add('text-white');
-    ctEl.append(ctBody);
+    var pollockBody = document.createElement('div');
+    pollockBody.classList.add('card');
+    pollockBody.classList.add('bg-primary');
+    pollockBody.classList.add('text-white');
+    pollockEl.append(pollockBody);
 
-    var ctPic = document.createElement('div');
-    ctPic.innerHTML = `<img src="https://i.ibb.co/7GcXVhp/ct3.jpg" height="200px" width="300px">`;
-    ctBody.appendChild(ctPic);
+    var pollockPic = document.createElement('div');
+    pollockPic.innerHTML = `<img src="https://i.ibb.co/jyvJ6nT/aj-pollock-home-run-robbery.jpg" height="200px" width="300px">`;
+    pollockBody.appendChild(pollockPic);
 
-    var ctName = document.createElement('div');
-    ctName.innerHTML = `Chris Taylor`;
-    ctBody.appendChild(ctName);
+    var pollockName = document.createElement('div');
+    pollockName.innerHTML = `AJ Pollock`;
+    pollockBody.appendChild(pollockName);
 
-    var ctAvg = document.createElement('div');
-    ctAvg.innerHTML = `Avg: ${data.proj_pecota_batting.queryResults.row.avg}`;
-    ctBody.appendChild(ctAvg);
+    var pollockAvg = document.createElement('div');
+    pollockAvg.innerHTML = `Avg: ${data.proj_pecota_batting.queryResults.row.avg}`;
+    pollockBody.appendChild(pollockAvg);
 
-    var ctOps = document.createElement('div');
-    ctOps.innerHTML = `OPS: ${data.proj_pecota_batting.queryResults.row.ops}`;
-    ctBody.appendChild(ctOps);
+    var pollockOps = document.createElement('div');
+    pollockOps.innerHTML = `OPS: ${data.proj_pecota_batting.queryResults.row.ops}`;
+    pollockBody.appendChild(pollockOps);
 
-    var ctHr = document.createElement('div');
-    ctHr.innerHTML = `HR: ${data.proj_pecota_batting.queryResults.row.hr}`;
-    ctBody.appendChild(ctHr);
+    var pollockHr = document.createElement('div');
+    pollockHr.innerHTML = `HR: ${data.proj_pecota_batting.queryResults.row.hr}`;
+    pollockBody.appendChild(pollockHr);
 
-    var ctRbi = document.createElement('div');
-    ctRbi.innerHTML = `RBI: ${data.proj_pecota_batting.queryResults.row.rbi}`;
-    ctBody.appendChild(ctRbi);
+    var pollockRbi = document.createElement('div');
+    pollockRbi.innerHTML = `RBI: ${data.proj_pecota_batting.queryResults.row.rbi}`;
+    pollockBody.appendChild(pollockRbi);
 
-    var ctR = document.createElement('div');
-    ctR.innerHTML = `R: ${data.proj_pecota_batting.queryResults.row.r}`;
-    ctBody.appendChild(ctR);
+    var pollockR = document.createElement('div');
+    pollockR.innerHTML = `R: ${data.proj_pecota_batting.queryResults.row.r}`;
+    pollockBody.appendChild(pollockR);
 }
 
 function getJt() {
@@ -253,12 +257,10 @@ function displayJt(data) {
     jtBody.classList.add('text-white');
     jtEl.append(jtBody);
 
-    var heavyHit = document.createElement('div');
-    heavyHit.innerHTML = `<h3>Hot Hitters 🔥</h3>`;
-    jtBody.appendChild(heavyHit);
+    
 
     var jtPic = document.createElement('div');
-    jtPic.innerHTML = `<img src="https://i.ibb.co/8Xs7XB7/justinturnerarticlepic.jpg" height="200px" width="300px">`;
+    jtPic.innerHTML = `<img src="https://i.ibb.co/nmCPrs9/jttttt.jpg" height="200px" width="300px">`;
     jtBody.appendChild(jtPic);
 
     var jtName = document.createElement('div');
@@ -317,8 +319,8 @@ function getSchedule() {
                     }
                     record.innerHTML = "";
                     jtStats.innerHTML = "";
-                    mookieStats.innerHTML = "";
-                    ctStats.innerHTML = "";
+                    treaStats.innerHTML = "";
+                    pollockStats.innerHTML = "";
                     displaySchedule(gamesDetails);
                 }
 
@@ -352,7 +354,7 @@ function displaySchedule(gamesDetails) {
     // scheduleBody.appendChild(gameAway);
 
     var matchup = document.createElement('div');
-    matchup.innerHTML = "<img src='https://media.api-sports.io/baseball/teams/"+ gamesDetails.gameAwayId + ".png' height=50px width=50px>" + `@` + "<img src='https://media.api-sports.io/baseball/teams/"+ gamesDetails.gameHomeId + ".png' height=50px width=50px>";
+    matchup.innerHTML = "<img src='https://media.api-sports.io/baseball/teams/"+ gamesDetails.gameAwayId + ".png' height=50px width=75px>" + `@` + "<img src='https://media.api-sports.io/baseball/teams/"+ gamesDetails.gameHomeId + ".png' height=50px width=75px>";
     scheduleBody.appendChild(matchup);
 
     // var at = document.createElement('div');
