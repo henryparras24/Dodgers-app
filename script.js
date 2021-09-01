@@ -6,6 +6,7 @@ var record = document.querySelector(".record");
 var jtStats = document.querySelector(".jtStats");
 var treaStats = document.querySelector(".treaStats");
 var pollockStats = document.querySelector(".pollockStats");
+var maxStats = document.querySelector(".maxStats");
 var schedule = document.querySelector(".schedule");
 
 winsLosesEl.addEventListener('click', getWinsLoses);
@@ -19,6 +20,7 @@ function getPlayerStats() {
     getTrea();
     getPollock();
     getJt();
+    getMax();
 }
 
 function getWinsLoses() {
@@ -43,6 +45,7 @@ function getWinsLoses() {
             jtStats.innerHTML = "";
             treaStats.innerHTML = "";
             pollockStats.innerHTML = "";
+            maxStats.innerHTML = "";
             schedule.innerHTML = "";
             displayRecord(data);
 
@@ -73,7 +76,7 @@ function displayRecord(data) {
     recordBody.appendChild(loses);
 
     var homeSplits = document.createElement('div');
-    homeSplits.innerHTML = `Home Splits 🏡`;
+    homeSplits.innerHTML = `@ Home Splits`;
     recordBody.appendChild(homeSplits);
 
     var homeWins = document.createElement('div');
@@ -85,7 +88,7 @@ function displayRecord(data) {
     recordBody.appendChild(homeLoses);
 
     var awaySplits = document.createElement('div');
-    awaySplits.innerHTML = `Away Splits ✈️`;
+    awaySplits.innerHTML = `@ Away Splits`;
     recordBody.appendChild(awaySplits);
 
     var awayWins = document.createElement('div');
@@ -321,6 +324,7 @@ function getSchedule() {
                     jtStats.innerHTML = "";
                     treaStats.innerHTML = "";
                     pollockStats.innerHTML = "";
+                    maxStats.innerHTML = "";
                     displaySchedule(gamesDetails);
                 }
 
@@ -366,3 +370,69 @@ function displaySchedule(gamesDetails) {
     // scheduleBody.appendChild(gameHomeLogo);
 }
 
+function getMax() {
+fetch("https://mlb-data.p.rapidapi.com/json/named.sport_pitching_tm.bam?season='2021'&player_id='453286'&league_list_id='mlb'&game_type='R'", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "mlb-data.p.rapidapi.com",
+		"x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051"
+	}
+})
+    .then(response => {
+        return response.json();
+    }).then(data => {
+	    console.log(data);
+        console.log(data.sport_pitching_tm.queryResults.row[1].era);
+        console.log(data.sport_pitching_tm.queryResults.row[1].whip);
+        console.log(data.sport_pitching_tm.queryResults.row[1].avg);
+        console.log(data.sport_pitching_tm.queryResults.row[1].k9);
+        console.log(data.sport_pitching_tm.queryResults.row[1].bb9);
+        console.log(data.sport_pitching_tm.queryResults.row[1].w);
+        displayMax(data);
+    })
+    .catch(err => {
+	    console.error(err);
+    });
+    }
+
+function displayMax (data){
+    var maxEl = document.querySelector("#max");
+
+    var maxBody = document.createElement('div');
+    maxBody.classList.add('card');
+    maxBody.classList.add('bg-primary');
+    maxBody.classList.add('text-white');
+    maxEl.append(maxBody);
+
+    var maxPic = document.createElement('div');
+    maxPic.innerHTML = `<img src="https://i.ibb.co/Tq9NbHF/max.jpg" height="200px" width="300px">`;
+    maxBody.appendChild(maxPic);
+
+    var maxName = document.createElement('div');
+    maxName.innerHTML = `Max Scherzer`;
+    maxBody.appendChild(maxName);
+
+    var maxEra = document.createElement('div');
+    maxEra.innerHTML = `ERA: ${data.sport_pitching_tm.queryResults.row[1].era}`;
+    maxBody.appendChild(maxEra);
+
+    var maxWhip = document.createElement('div');
+    maxWhip.innerHTML = `WHIP: ${data.sport_pitching_tm.queryResults.row[1].whip}`;
+    maxBody.appendChild(maxWhip);
+
+    var maxAvg = document.createElement('div');
+    maxAvg.innerHTML = `Opp AVG: ${data.sport_pitching_tm.queryResults.row[1].avg}`;
+    maxBody.appendChild(maxAvg);
+
+    var maxK9 = document.createElement('div');
+    maxK9.innerHTML = `K/9: ${data.sport_pitching_tm.queryResults.row[1].k9}`;
+    maxBody.appendChild(maxK9);
+
+    var maxBb9 = document.createElement('div');
+    maxBb9.innerHTML = `BB/9: ${data.sport_pitching_tm.queryResults.row[1].bb9}`;
+    maxBody.appendChild(maxBb9);
+
+    var maxW = document.createElement('div');
+    maxW.innerHTML = `Wins: ${data.sport_pitching_tm.queryResults.row[1].w}`;
+    maxBody.appendChild(maxW);
+}
