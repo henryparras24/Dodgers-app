@@ -7,6 +7,7 @@ var jtStats = document.querySelector(".jtStats");
 var treaStats = document.querySelector(".treaStats");
 var pollockStats = document.querySelector(".pollockStats");
 var maxStats = document.querySelector(".maxStats");
+var ferrisStats = document.querySelector(".ferrisStats");
 var schedule = document.querySelector(".schedule");
 
 winsLosesEl.addEventListener('click', getWinsLoses);
@@ -21,6 +22,7 @@ function getPlayerStats() {
     getPollock();
     getJt();
     getMax();
+    getFerris();
 }
 
 function getWinsLoses() {
@@ -46,6 +48,7 @@ function getWinsLoses() {
             treaStats.innerHTML = "";
             pollockStats.innerHTML = "";
             maxStats.innerHTML = "";
+            ferrisStats.innerHTML = "";
             schedule.innerHTML = "";
             displayRecord(data);
 
@@ -325,6 +328,7 @@ function getSchedule() {
                     treaStats.innerHTML = "";
                     pollockStats.innerHTML = "";
                     maxStats.innerHTML = "";
+                    ferrisStats.innerHTML = "";
                     displaySchedule(gamesDetails);
                 }
 
@@ -409,7 +413,7 @@ function displayMax (data){
     maxBody.appendChild(maxPic);
 
     var maxName = document.createElement('div');
-    maxName.innerHTML = `Max Scherzer`;
+    maxName.innerHTML = `Max Scherzer (Dodgers)`;
     maxBody.appendChild(maxName);
 
     var maxEra = document.createElement('div');
@@ -436,3 +440,70 @@ function displayMax (data){
     maxW.innerHTML = `Wins: ${data.sport_pitching_tm.queryResults.row[1].w}`;
     maxBody.appendChild(maxW);
 }
+
+function getFerris() {
+    fetch("https://mlb-data.p.rapidapi.com/json/named.sport_pitching_tm.bam?season='2021'&player_id='621111'&league_list_id='mlb'&game_type='R'", {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "mlb-data.p.rapidapi.com",
+            "x-rapidapi-key": "05d6319646mshf929af62d4baa06p1ef8c0jsn0a043e282051"
+        }
+    })
+        .then(response => {
+            return response.json();
+        }).then(data => {
+            console.log(data);
+            console.log(data.sport_pitching_tm.queryResults.row.era);
+            console.log(data.sport_pitching_tm.queryResults.row.whip);
+            console.log(data.sport_pitching_tm.queryResults.row.avg);
+            console.log(data.sport_pitching_tm.queryResults.row.k9);
+            console.log(data.sport_pitching_tm.queryResults.row.bb9);
+            console.log(data.sport_pitching_tm.queryResults.row.w);
+            displayFerris(data);
+        })
+        .catch(err => {
+            console.error(err);
+        });
+        }
+    
+    function displayFerris (data){
+        var ferrisEl = document.querySelector("#ferris");
+    
+        var ferrisBody = document.createElement('div');
+        ferrisBody.classList.add('card');
+        ferrisBody.classList.add('bg-primary');
+        ferrisBody.classList.add('text-white');
+        ferrisEl.append(ferrisBody);
+    
+        var ferrisPic = document.createElement('div');
+        ferrisPic.innerHTML = `<img src="https://i.ibb.co/fGtfvXg/walker-buehler-2019-nlds-12.jpg" height="200px" width="300px">`;
+        ferrisBody.appendChild(ferrisPic);
+    
+        var ferrisName = document.createElement('div');
+        ferrisName.innerHTML = `Walker Buehler`;
+        ferrisBody.appendChild(ferrisName);
+    
+        var ferrisEra = document.createElement('div');
+        ferrisEra.innerHTML = `ERA: ${data.sport_pitching_tm.queryResults.row.era}`;
+        ferrisBody.appendChild(ferrisEra);
+    
+        var ferrisWhip = document.createElement('div');
+        ferrisWhip.innerHTML = `WHIP: ${data.sport_pitching_tm.queryResults.row.whip}`;
+        ferrisBody.appendChild(ferrisWhip);
+    
+        var ferrisAvg = document.createElement('div');
+        ferrisAvg.innerHTML = `Opp AVG: ${data.sport_pitching_tm.queryResults.row.avg}`;
+        ferrisBody.appendChild(ferrisAvg);
+    
+        var ferrisK9 = document.createElement('div');
+        ferrisK9.innerHTML = `K/9: ${data.sport_pitching_tm.queryResults.row.k9}`;
+        ferrisBody.appendChild(ferrisK9);
+    
+        var ferrisBb9 = document.createElement('div');
+        ferrisBb9.innerHTML = `BB/9: ${data.sport_pitching_tm.queryResults.row.bb9}`;
+        ferrisBody.appendChild(ferrisBb9);
+    
+        var ferrisW = document.createElement('div');
+        ferrisW.innerHTML = `Wins: ${data.sport_pitching_tm.queryResults.row.w}`;
+        ferrisBody.appendChild(ferrisW);
+    }
