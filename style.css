@@ -5,3 +5,7 @@
 .pill {border-radius: 30px; padding: 10px;}
 
 .pills {display: flex; justify-content: center;}
+
+.gradient {background: linear-gradient(90deg, #0700b8 0%, dodgerblue 100%);}
+
+/* #00d2ff */

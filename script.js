@@ -66,7 +66,7 @@ function displayRecord(data) {
 
     var recordBody = document.createElement('div');
     recordBody.classList.add('card');
-    recordBody.classList.add('bg-primary');
+    recordBody.classList.add('gradient');
     recordBody.classList.add('text-white');
     recordEl.append(recordBody);
 
@@ -130,7 +130,7 @@ function displayTrea(data) {
 
     var treaBody = document.createElement('div');
     treaBody.classList.add('card');
-    treaBody.classList.add('bg-primary');
+    treaBody.classList.add('gradient');
     treaBody.classList.add('text-white');
     treaEl.append(treaBody);
 
@@ -200,7 +200,7 @@ function displayPollock(data) {
 
     var pollockBody = document.createElement('div');
     pollockBody.classList.add('card');
-    pollockBody.classList.add('bg-primary');
+    pollockBody.classList.add('gradient');
     pollockBody.classList.add('text-white');
     pollockEl.append(pollockBody);
 
@@ -259,7 +259,7 @@ function displayJt(data) {
 
     var jtBody = document.createElement('div');
     jtBody.classList.add('card');
-    jtBody.classList.add('bg-primary');
+    jtBody.classList.add('gradient');
     jtBody.classList.add('text-white');
     jtEl.append(jtBody);
 
@@ -349,7 +349,7 @@ function displaySchedule(gamesDetails) {
 
     var scheduleBody = document.createElement('div');
     scheduleBody.classList.add('card');
-    scheduleBody.classList.add('bg-primary');
+    scheduleBody.classList.add('gradient');
     scheduleBody.classList.add('text-white');
     scheduleEl.append(scheduleBody);
 
@@ -404,7 +404,7 @@ function displayMax (data){
 
     var maxBody = document.createElement('div');
     maxBody.classList.add('card');
-    maxBody.classList.add('bg-primary');
+    maxBody.classList.add('gradient');
     maxBody.classList.add('text-white');
     maxEl.append(maxBody);
 
@@ -471,7 +471,7 @@ function getFerris() {
     
         var ferrisBody = document.createElement('div');
         ferrisBody.classList.add('card');
-        ferrisBody.classList.add('bg-primary');
+        ferrisBody.classList.add('gradient');
         ferrisBody.classList.add('text-white');
         ferrisEl.append(ferrisBody);
     
